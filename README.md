@@ -60,3 +60,40 @@ We need a container to keep track and update every particle and emitter. This co
 # Code Implementation
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_RqebZ5weG4?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+Particles need to be created fast and in large cuantities, and dynamically allocating every particle not only is not very efficient but it could cause memory fragmentation. In order to avoid this, we need to create an **Object Pool.** An Object Pool is a class that will allocate and hold reusable particles at startup. It can be easily done with just two lines of code:
+
+```c++
+
+	static const int POOL_SIZE = 1000;
+
+	Particle particles_[POOL_SIZE];
+```
+
+Every particle will need to have a function to know if it is alive or not:
+
+```c++
+bool Particle::inUse() const
+{
+	return framesLeft_ > 0;
+}
+```
+
+Having this in mind, creating a particle just means "telling it" that it is "alive":
+
+```c++
+Particle* mdParticleSystem::create(ParticleInfo info)
+{
+	// Find an available particle.
+	for (int i = 0; i < POOL_SIZE; i++)
+	{
+		if (!particles_[i].inUse())
+		{
+			particles_[i].init(info);
+			return &particles_[i];
+		}
+	}
+}
+```
+
+In this process, we need to pass as an argument the information that defines the atributes of the Particle, in this case, the information is grouped in a struct.
