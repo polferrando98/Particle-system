@@ -15,7 +15,7 @@ Even simple games benefit a lot from particle effects:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m_kPN9QeHXs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
-## How do they work
+## How do they work?
 
 Basically, a particle system needs three elements:
 
@@ -57,3 +57,6 @@ Emitters take care of creating and configuring the particles. These emitters als
 
 We need a container to keep track and update every particle and emitter. This container will also define what is the maximum number of particles on screen.
 
+# Code Implementation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/m_kPN9QeHXs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
