@@ -1,9 +1,7 @@
 
-“I am <https://www.linkedin.com/in/pol-ferrando-ab8170b9/>(Pol Ferrando), student of the 
-<https://www.citm.upc.edu/ing/estudis/graus-videojocs/>(Bachelor’s Degree in 
-Video Games by UPC at CITM). This content is generated for the second year’s 
-subject Project 2, under supervision of lecturer 
-<https://es.linkedin.com/in/ricardpillosu>(Ricard Pillosu).”
+“I am [Pol Ferrando Folch](https://www.linkedin.com/in/pol-ferrando-ab8170b9/), student of the [Bachelor’s Degree in 
+Video Games by UPC at CITM](https://www.citm.upc.edu/ing/estudis/graus-videojocs/). This content is generated for the second year’s 
+subject Project 2, under supervision of lecturer [Ricard Pillosu](https://es.linkedin.com/in/ricardpillosu).”
 
 # Particle systems
 
@@ -13,14 +11,16 @@ In a 2D videogame, a Particle system is a technique that uses a large number of 
 
 Even simple games benefit a lot from particle effects:
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=_RqebZ5weG4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtu.be/_RqebZ5weG4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## How do they work
 
 Basically, a particle system needs three elements:
 
 - Particles
+
 - Emitters
+
 - A container
 
 ### Particles
@@ -28,13 +28,21 @@ Basically, a particle system needs three elements:
 Particles are the small sprites. They have a combiantion of diverse atributes, the change of this atributes during the lifetime of a particle is a key ingredient in simulating the fuzzy effects. These atributes usually include:
 
 -Scale
+
 -Lifetime
+
 -Position
+
 -Velocity
+
 -Angle
+
 -Color
+
 -Blend mode
+
 -Rotation
+
 
 ### Emitters
 
@@ -43,7 +51,7 @@ Emitters take care of creating and configuring the particles. These emitters als
 ![]()
 
 
-### Containers
+### Container
 
-Containers 
+We need a container to keep track and update every particle and emitter. 
 
