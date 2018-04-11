@@ -1,7 +1,7 @@
 
-“I am [Pol Ferrando Folch](https://www.linkedin.com/in/pol-ferrando-ab8170b9/), student of the [Bachelor’s Degree in 
+I am [Pol Ferrando Folch](https://www.linkedin.com/in/pol-ferrando-ab8170b9/), student of the [Bachelor’s Degree in 
 Video Games by UPC at CITM](https://www.citm.upc.edu/ing/estudis/graus-videojocs/). This content is generated for the second year’s 
-subject Project 2, under supervision of lecturer [Ricard Pillosu](https://es.linkedin.com/in/ricardpillosu).”
+subject Project 2, under supervision of lecturer [Ricard Pillosu](https://es.linkedin.com/in/ricardpillosu).
 
 # Particle systems
 
@@ -11,7 +11,7 @@ In a 2D videogame, a Particle system is a technique that uses a large number of 
 
 Even simple games benefit a lot from particle effects:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_RqebZ5weG4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/_RqebZ5weG4?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## How do they work
 
