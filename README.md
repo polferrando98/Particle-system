@@ -11,7 +11,7 @@ In a 2D videogame, a Particle system is a technique that uses a large number of 
 
 Even simple games benefit a lot from particle effects:
 
-<iframe width="560" height="315" src="https://youtu.be/_RqebZ5weG4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_RqebZ5weG4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## How do they work
 
@@ -27,28 +27,28 @@ Basically, a particle system needs three elements:
 
 Particles are the small sprites. They have a combiantion of diverse atributes, the change of this atributes during the lifetime of a particle is a key ingredient in simulating the fuzzy effects. These atributes usually include:
 
--Scale
+- Scale
 
--Lifetime
+- Lifetime
 
--Position
+- Position
 
--Velocity
+- Velocity
 
--Angle
+- Angle
 
--Color
+- Color
 
--Blend mode
+- Blend mode
 
--Rotation
+- Rotation
 
 
 ### Emitters
 
 Emitters take care of creating and configuring the particles. These emitters also have configurable attributes like the frequency of emisssion or the number of particles created. But they also manage another key element in the simulation of effects: Randomness. Adding a variation in some of the atributes of the particles makes the system seem more natural and spontaneous.
 
-![]()
+![](https://raw.githubusercontent.com/polferrando98/Particle-system/master/docs/Blender3D_LoopingParticleFire.gif)
 
 
 ### Container
