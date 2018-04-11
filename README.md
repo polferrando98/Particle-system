@@ -11,7 +11,9 @@ In a 2D videogame, a Particle system is a technique that uses a large number of 
 
 Even simple games benefit a lot from particle effects:
 
-<iframe src="https://www.youtube.com/embed/_RqebZ5weG4?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/m_kPN9QeHXs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 ## How do they work
 
@@ -53,5 +55,5 @@ Emitters take care of creating and configuring the particles. These emitters als
 
 ### Container
 
-We need a container to keep track and update every particle and emitter. 
+We need a container to keep track and update every particle and emitter. This container will also define what is the maximum number of particles on screen.
 
