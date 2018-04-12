@@ -60,11 +60,12 @@ Emitters take care of creating and configuring the particles. These emitters als
 
 We need a container to keep track and update every particle and emitter. This container will also define what is the maximum number of particles on screen.
 
-# Code Implementation
+# Particle systems
 
-##Object Pool (The Container)
+## What is a Particle system?
 
-Particles need to be created fast and in large cuantities, and dynamically allocating every particle not only is not very efficient but it could cause memory fragmentation. In order to avoid this, we need to create an **Object Pool.** An Object Pool is a class that will allocate and hold reusable particles at startup. It can be easily done with just two lines of code:
+I
+Particles need to be created fast and in large quantities. Dynamically allocating every particle not only is hardly efficient but it could cause memory fragmentation. In order to avoid this, we need to create an **Object Pool.** An Object Pool is a class that will allocate and hold reusable particles at startup. It can be easily done with just two lines of code:
 
 ```c++
 static const int POOL_SIZE = 1000;
