@@ -60,11 +60,10 @@ Emitters take care of creating and configuring the particles. These emitters als
 
 We need a container to keep track and update every particle and emitter. This container will also define what is the maximum number of particles on screen.
 
-# Particle systems
+# Code Implementation
 
-## What is a Particle system?
+## Object Pool (The Container)
 
-I
 Particles need to be created fast and in large quantities. Dynamically allocating every particle not only is hardly efficient but it could cause memory fragmentation. In order to avoid this, we need to create an **Object Pool.** An Object Pool is a class that will allocate and hold reusable particles at startup. It can be easily done with just two lines of code:
 
 ```c++
@@ -73,7 +72,7 @@ static const int POOL_SIZE = 1000;
 Particle particles_[POOL_SIZE];
 ```
 
-##The process of creating a particle:
+## The process of creating a particle:
 
 Every particle will need to have a function to know if it is alive or not:
 
@@ -103,7 +102,7 @@ Particle* mdParticleSystem::create(ParticleInfo info)
 
 In this process, we need to pass as an argument the information that defines the atributes of the Particle, in this case, the information is grouped in a struct.
 
-##Particle Emitter
+## Particle Emitter
 
 The class in charge of loading and passing this information, as well as creating the paricle itlsef, is the emmiter:
 
@@ -137,7 +136,7 @@ As we can see, the emitter creates particles based on a preiod that get out of t
 
 An example of how to configure the Scale of the particle:
 
-##The Particle
+## The Particle
 
 ```c++
 void ParticleEmitter::configureParticle(ParticleInfo & info)
