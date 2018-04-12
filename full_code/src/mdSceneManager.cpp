@@ -27,8 +27,7 @@ bool mdSceneManager::start()
 {
 	bool ret = true;
 
-	App->particle_system->createEmitter({ 150,550 }, "particles/faya.xml");
-	App->particle_system->createEmitter({ 350,550 }, "particles/smouk.xml");
+	App->particle_system->createEmitter({ 450,550 }, "particles/goku.xml");
 	App->particle_system->createEmitter({ 1060,550 }, "particles/goku-solution.xml");
 	goku = App->textures->load("particles/Goku_render.png");
 
@@ -108,6 +107,7 @@ bool mdSceneManager::update(float dt)
 
 
 	App->render->blit(30, goku, 900, 100, NULL, 0.5f);
+	App->render->blit(30, goku, 100, 100, NULL, 0.5f);
 
 
 	return true;
