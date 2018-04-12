@@ -11,8 +11,6 @@ class mdParticleSystem :
 	public Module
 {
 public:
-	bool awake(const pugi::xml_node& md_config) override;
-	bool start() override;
 	bool update(float dt) override;
 
 	mdParticleSystem();
@@ -29,9 +27,9 @@ public:
 	int particles_count = 0;
 
 private:
-	static const int POOL_SIZE = 1000;
-
 	Timer debug_particle_timer;
+
+	static const int POOL_SIZE = 1000;
 
 	Particle particles_[POOL_SIZE];
 

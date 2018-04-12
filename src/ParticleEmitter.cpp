@@ -37,6 +37,59 @@ ParticleEmitter::~ParticleEmitter()
 Particle * ParticleEmitter::createParticle()
 {
 	ParticleInfo info;
+
+	configureParticle(info); //This loads the configuration from an XML
+
+	emission_timer.start();
+
+	return App->particle_system->create(info);
+}
+
+void ParticleEmitter::update(float dt)
+{
+
+	if (emission_timer.read() >= period) {
+		createParticle();
+		current_emissions++;
+	}
+
+	if (current_emissions >= max_emissions)
+		active = false;
+
+}
+
+float ParticleEmitter::addOrSubstractRand(float atribute, int maxVariation) const
+{
+	float atribute_variated = atribute;
+
+	int variation = rand() % ((2 * maxVariation) + 1);
+
+	atribute_variated -= maxVariation;
+	atribute_variated += +variation;
+
+	return atribute_variated;
+}
+
+bool ParticleEmitter::loadConfig(pugi::xml_document & config_file, pugi::xml_node & config_node, string path)
+{
+	char* buffer;
+	int size = App->filesystem->load(path.c_str(), &buffer);
+	pugi::xml_parse_result result = config_file.load_buffer(buffer, size);
+	if (size != 0)
+		RELEASE(buffer);
+
+	if (result == NULL) {
+		LOG("Application : Could not load xml - %s", result.description());
+		return false;
+	}
+	else {
+		config_node = config_file.child("config");
+		return true;
+	}
+}
+
+void ParticleEmitter::configureParticle(ParticleInfo & info)
+{
 	float angle = config.child("angle").attribute("value").as_float(90);
 	int angle_var = config.child("angle").attribute("variation").as_float(0);
 	info.angle = addOrSubstractRand(angle, angle_var);
@@ -71,11 +124,11 @@ Particle * ParticleEmitter::createParticle()
 
 	info.final_color.r = config.child("final_color").attribute("r").as_int(255);
 	info.final_color.g = config.child("final_color").attribute("g").as_int(255);
-	info.final_color.b= config.child("final_color").attribute("b").as_int(255);
+	info.final_color.b = config.child("final_color").attribute("b").as_int(255);
 	info.final_color.alpha = config.child("final_color").attribute("a").as_int(255);
 
 	info.blend = (SDL_BlendMode)config.child("blend_mode").attribute("value").as_int(0);
-	
+
 	info.texture_path = config.child("texture_path").attribute("value").as_string("Error path");
 
 	info.initial_spin = config.child("spin").attribute("initial").as_float(0);
@@ -84,57 +137,5 @@ Particle * ParticleEmitter::createParticle()
 	info.final_spin = addOrSubstractRand(final_spin, final_spin_var);
 
 	info.draw_priority = config.child("draw_priority").attribute("value").as_int(1);
-
-	emission_timer.start();
-
-	return App->particle_system->create(info);
-}
-
-void ParticleEmitter::update(float dt)
-{
-
-	if (emission_timer.read() >= period) {
-		createParticle();
-		current_emissions++;
-	}
-
-	if (current_emissions >= max_emissions)
-		active = false;
-
-}
-
-void ParticleEmitter::setUp()
-{
-	//period = 100;
-}
-
-float ParticleEmitter::addOrSubstractRand(float atribute, int maxVariation)
-{
-	float atribute_variated = atribute;
-
-	int variation = rand() % ((2 * maxVariation) + 1);
-
-	atribute_variated -= maxVariation;
-	atribute_variated += +variation;
-
-	return atribute_variated;
-}
-
-bool ParticleEmitter::loadConfig(pugi::xml_document & config_file, pugi::xml_node & config_node, string path)
-{
-	char* buffer;
-	int size = App->filesystem->load(path.c_str(), &buffer);
-	pugi::xml_parse_result result = config_file.load_buffer(buffer, size);
-	if (size != 0)
-		RELEASE(buffer);
-
-	if (result == NULL) {
-		LOG("Application : Could not load xml - %s", result.description());
-		return false;
-	}
-	else {
-		config_node = config_file.child("config");
-		return true;
-	}
 }
 

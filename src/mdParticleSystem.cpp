@@ -5,20 +5,6 @@
 #include "ParticleEmitter.h"
 
 
-bool mdParticleSystem::awake(const pugi::xml_node & md_config)
-{
-	
-	return true;
-}
-
-bool mdParticleSystem::start()
-{
-	//PROVISIONAL: Should be loaded from an xml
-
-
-	return true;
-}
-
 bool mdParticleSystem::update(float dt)
 {
 	debug_particle_timer.start();
@@ -56,7 +42,6 @@ void mdParticleSystem::createEmitter(fPoint pos, string config_path)
 
 	emitter = new ParticleEmitter(pos, config_path);
 	particle_emitters.push_back(emitter);
-
 }
 
 void mdParticleSystem::updateParticles()
@@ -67,7 +52,6 @@ void mdParticleSystem::updateParticles()
 		if (!particles_[i].inUse())
 			continue;
 
-		
 		particles_[i].animate();
 
 		if (!particles_[i].inUse())

@@ -11,13 +11,6 @@
 #include "mdInput.h"
 #include "mdRender.h"
 #include "mdTextures.h"
-#include "mdCollision.h"
-#include "mdEntities.h"
-#include "mdAudio.h"
-#include "mdFonts.h"
-#include "mdGuiManager.h"
-#include "mdMap.h"
-#include "mdProjectiles.h"
 #include "mdSceneManager.h"
 #include "mdParticleSystem.h"
 
@@ -27,13 +20,6 @@ Application::Application(int argc, char* args[]) {
 	render = new mdRender;
 	input = new mdInput;
 	textures = new mdTextures;
-	collision = new mdCollision;
-	entities = new mdEntities;
-	audio = new mdAudio;
-	fonts = new mdFonts;
-	gui = new mdGuiManager;
-	map = new mdMap;
-	projectiles = new mdProjectiles;
 	scene_manager = new mdSceneManager;
 	particle_system = new mdParticleSystem;
 
@@ -43,15 +29,9 @@ Application::Application(int argc, char* args[]) {
 	addModule(render);
 	addModule(input);
 	addModule(textures);
-	addModule(projectiles); // Allways check projectiles before collisions
-	addModule(collision);
-	addModule(audio);
-	addModule(fonts);
-	addModule(gui);
-	addModule(map);
-	addModule(entities);
-	addModule(scene_manager);
 	addModule(particle_system);
+	addModule(scene_manager);
+
 
 }
 

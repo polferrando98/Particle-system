@@ -33,20 +33,28 @@ Basically, a particle system needs three elements:
 Particles are the small sprites. They have a combiantion of diverse atributes, the change of this atributes during the lifetime of a particle is a key ingredient in simulating the fuzzy effects. These atributes usually include:
 
 - Scale
+Useful to make things get smaller untill they dissapear
 
 - Lifetime
+How long will the particle last?
 
-- Position
+- Position variation
+A value between this and 0 will be added or substracted of the position
 
 - Velocity
+The magnitude of the velocity
 
 - Angle
+The angle of the velocity
 
 - Color
+Usually given in rgb and alpha
 
 - Blend mode
+How particles mix they colors when they overlap
 
 - Rotation
+
 
 
 ### Emitters
@@ -62,7 +70,7 @@ We need a container to keep track and update every particle and emitter. This co
 
 # Code Implementation
 
-## Object Pool (The Container)
+### Object Pool (The Container)
 
 Particles need to be created fast and in large quantities. Dynamically allocating every particle not only is hardly efficient but it could cause memory fragmentation. In order to avoid this, we need to create an **Object Pool.** An Object Pool is a class that will allocate and hold reusable particles at startup. It can be easily done with just two lines of code:
 
@@ -102,7 +110,7 @@ Particle* mdParticleSystem::create(ParticleInfo info)
 
 In this process, we need to pass as an argument the information that defines the atributes of the Particle, in this case, the information is grouped in a struct.
 
-## Particle Emitter
+### Particle Emitter
 
 The class in charge of loading and passing this information, as well as creating the paricle itlsef, is the emmiter:
 
@@ -136,7 +144,7 @@ As we can see, the emitter creates particles based on a preiod that get out of t
 
 An example of how to configure the Scale of the particle:
 
-## The Particle
+### The Particle
 
 ```c++
 void ParticleEmitter::configureParticle(ParticleInfo & info)
@@ -195,7 +203,7 @@ float Particle::calculateRatio(float final, float inital, float variation) const
 }
 ```
 
-Finally it is the Container that will update and draw the Particle and it's Emitter:
+Finally, it is the Container that will update and draw the Particle and it's Emitter:
 
 ```c++
 void mdParticleSystem::updateParticles()
@@ -213,6 +221,26 @@ void mdParticleSystem::updateParticles()
 	}
 }
 
+
+```
+
+## Creating and Deleting Emitters
+
+```c++
+void mdParticleSystem::createEmitter(fPoint pos, string config_path)
+{
+	ParticleEmitter* emitter = nullptr;
+
+	emitter = new ParticleEmitter(pos, config_path);
+	particle_emitters.push_back(emitter);
+}
+```
+
+Creating an emitter is pretty straightforward, we just need to add it to a list in order to iterate all the emitters later and we will also need somewhere to get the data to configure it.
+
+We can use the update loop to check if we need to delete them:
+
+```c++
 void mdParticleSystem::updateEmitters()
 {
 	list<ParticleEmitter*>::iterator it = particle_emitters.begin();
@@ -229,5 +257,4 @@ void mdParticleSystem::updateEmitters()
 		}
 	}
 }
-
 ```

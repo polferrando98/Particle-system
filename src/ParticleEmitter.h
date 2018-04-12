@@ -11,6 +11,8 @@
 
 enum emmiterType { FOUNTAIN, EXPLOSION };
 
+ParticleInfo;
+
 class ParticleEmitter
 {
 public:
@@ -19,9 +21,12 @@ public:
 
 	Particle* createParticle();
 	void update(float dt);
-	void setUp();
-	float addOrSubstractRand(float atribute, int maxVariation);
+	float addOrSubstractRand(float atribute, int maxVariation) const;
+
+
+private:
 	bool loadConfig(pugi::xml_document& config_file, pugi::xml_node& config_node, string path);
+	void configureParticle(ParticleInfo &info);
 
 public:
 	bool active = true;

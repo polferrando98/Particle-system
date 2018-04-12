@@ -14,16 +14,8 @@ class mdFilesystem;
 class mdInput;
 class mdRender;
 class mdTextures;
-
-class mdCollision;
-
-class mdEntities;
-class mdAudio;
-class mdFonts;
-class mdGuiManager;
-class mdMap;
-class mdProjectiles;
 class mdSceneManager;
+
 class mdParticleSystem;
 
 
@@ -77,13 +69,6 @@ public:
 	mdRender*			render;
 	mdInput*			input;
 	mdTextures*			textures;
-	mdCollision*		collision;
-	mdEntities*			entities;
-	mdAudio*			audio;
-	mdFonts*			fonts;
-	mdGuiManager*		gui;
-	mdMap*				map;
-	mdProjectiles*		projectiles;
 	mdSceneManager*		scene_manager;
 	mdParticleSystem*	particle_system;
 };

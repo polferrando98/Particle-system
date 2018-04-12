@@ -17,8 +17,6 @@ struct Color {
 struct ParticleInfo {
 	int lifetime;
 
-
-
 	float initial_scale;
 	float final_scale;
 
@@ -58,13 +56,15 @@ public:
 
 	void Draw();
 
+private:
+
 	float calculateRatio(float final, float initial = 0, float variation = 0) const;
 
 	float degToRad(float deg);
 
-	void updateColors();
-
 	void config(ParticleInfo info);
+
+	void updateColors();
 
 	void loadTexture(const char* path);
 

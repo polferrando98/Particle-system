@@ -33,13 +33,13 @@ void Particle::init(ParticleInfo info)
 
 void Particle::animate()
 {
-	//Here we calculate shit
-	if (!inUse()) return;
+	//Here we calculate how the attributes should be
 
 	framesLeft_--;
 
 	if (!inUse()) {
 		App->textures->unload(texture);
+		return; 
 	}
 
 	lifetime_ratio = float(framesLeft_) / float(lifetime); 
@@ -50,7 +50,7 @@ void Particle::animate()
 
 	updateColors();
 
-	pos.x += vel.x;
+	pos.x += vel.x; //Simple linear motion
 	pos.y += vel.y;
 }
 
