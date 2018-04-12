@@ -62,6 +62,7 @@ We need a container to keep track and update every particle and emitter. This co
 
 # Code Implementation
 
+##Object Pool
 Particles need to be created fast and in large cuantities, and dynamically allocating every particle not only is not very efficient but it could cause memory fragmentation. In order to avoid this, we need to create an **Object Pool.** An Object Pool is a class that will allocate and hold reusable particles at startup. It can be easily done with just two lines of code:
 
 ```c++
@@ -98,6 +99,8 @@ Particle* mdParticleSystem::create(ParticleInfo info)
 
 In this process, we need to pass as an argument the information that defines the atributes of the Particle, in this case, the information is grouped in a struct.
 
+##Particle Emitter
+
 The class in charge of loading and passing this information, as well as creating the paricle itlsef, is the emmiter:
 
 ```c++
@@ -127,3 +130,63 @@ void ParticleEmitter::update(float dt)
 ```
 
 As we can see, the emitter creates particles based on a preiod that get out of the frequency that is loaded.
+
+An example of how to configure the Scale of the particle:
+
+```c++
+void ParticleEmitter::configureParticle(ParticleInfo & info)
+{
+	float initial_scale = config.child("initial_scale").attribute("value").as_float(1);
+	float initial_scale_var = config.child("initial_scale").attribute("variation").as_float(0);
+	info.initial_scale = addOrSubstractRand(initial_scale, initial_scale_var); //This method can be used for variations in all the attributes
+
+	//... Load the rest of the attributes
+}
+
+//Adds a random +-variation to the attribute
+float ParticleEmitter::addOrSubstractRand(float atribute, int maxVariation) const 
+{
+	float atribute_variated = atribute;
+
+	int variation = rand() % ((2 * maxVariation) + 1);
+
+	atribute_variated -= maxVariation;
+	atribute_variated += +variation;
+
+	return atribute_variated;
+}
+
+```
+
+The particle itself  will take care of changing it's attributes in relation with it's lifetime based on the initial and final values:
+
+``` c++
+void Particle::animate()
+{
+	//Here we calculate how the attributes should be
+	if (!inUse()) return;
+
+	framesLeft_--;
+
+	if (!inUse()) {
+		App->textures->unload(texture);
+	}
+
+	lifetime_ratio = float(framesLeft_) / float(lifetime); 
+
+	scale = calculateRatio(final_scale, initial_scale);
+
+	current_spin = calculateRatio(final_spin, initial_spin);
+
+	updateColors();
+
+	pos.x += vel.x; //Simple linear motion
+	pos.y += vel.y;
+}
+
+float Particle::calculateRatio(float final, float inital, float variation) const
+{
+	return (final - inital) * (1-lifetime_ratio) + inital; //Quick mafhs
+}
+```
+
