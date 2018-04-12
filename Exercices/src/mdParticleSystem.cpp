@@ -28,14 +28,7 @@ Particle* mdParticleSystem::create(ParticleInfo info)
 	// TODO 1 Find a particle that is not being used and init it
 	///You should be able to see a particle when you press "P"
 
-	for (int i = 0; i < POOL_SIZE; i++)
-	{
-		if (!particles_[i].inUse())
-		{
-			particles_[i].init(info);
-			return &particles_[i];
-		}
-	}
+
 	return nullptr;
 }
 

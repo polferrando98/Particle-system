@@ -26,11 +26,8 @@ ParticleEmitter::ParticleEmitter(fPoint pos, string config_path)
 	type = (emmiterType)config.child("type").attribute("value").as_int(0);
 
 	if (type == EXPLOSION) {
-		//TODO 5.1 Create all the particles at once and make sure that they are not recreated later. 
+		//TODO 5.1 Create all the particles at once and make sure that they are not recreated later. You should use the active atribute
 		///When you finish you should be able to see an explosion pressing "e"
-		//for (int i = 0; i < max_emissions; i++)
-		//	createParticle();
-		//active = false;
 	}
 }
 
@@ -54,13 +51,6 @@ void ParticleEmitter::update(float dt)
 {
 	//TODO 2 Create Particles when needed using the emission_timer and the period
 	///You should see particles doing strange things when you finish. Try pressing 1, 2 or 3
-	if (emission_timer.read() >= period) {
-		createParticle();
-		current_emissions++;
-	}
-
-	if (current_emissions >= max_emissions)
-		active = false;
 
 }
 
