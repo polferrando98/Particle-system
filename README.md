@@ -62,7 +62,8 @@ We need a container to keep track and update every particle and emitter. This co
 
 # Code Implementation
 
-##Object Pool
+##Object Pool (The Container)
+
 Particles need to be created fast and in large cuantities, and dynamically allocating every particle not only is not very efficient but it could cause memory fragmentation. In order to avoid this, we need to create an **Object Pool.** An Object Pool is a class that will allocate and hold reusable particles at startup. It can be easily done with just two lines of code:
 
 ```c++
@@ -70,6 +71,8 @@ static const int POOL_SIZE = 1000;
 
 Particle particles_[POOL_SIZE];
 ```
+
+##The process of creating a particle:
 
 Every particle will need to have a function to know if it is alive or not:
 
@@ -133,6 +136,8 @@ As we can see, the emitter creates particles based on a preiod that get out of t
 
 An example of how to configure the Scale of the particle:
 
+##The Particle
+
 ```c++
 void ParticleEmitter::configureParticle(ParticleInfo & info)
 {
@@ -163,13 +168,13 @@ The particle itself  will take care of changing it's attributes in relation with
 ``` c++
 void Particle::animate()
 {
-	//Here we calculate how the attributes should be
-	if (!inUse()) return;
+	//Here we calculate how the attributes should be:
 
 	framesLeft_--;
 
 	if (!inUse()) {
 		App->textures->unload(texture);
+		return;
 	}
 
 	lifetime_ratio = float(framesLeft_) / float(lifetime); 
@@ -190,3 +195,39 @@ float Particle::calculateRatio(float final, float inital, float variation) const
 }
 ```
 
+Finally it is the Container that will update and draw the Particle and it's Emitter:
+
+```c++
+void mdParticleSystem::updateParticles()
+{
+	particles_count = 0;
+	for (int i = 0; i < POOL_SIZE; i++)
+	{
+		particles_[i].animate();
+
+		if (!particles_[i].inUse())
+			continue;
+
+		particles_[i].Draw();
+		particles_count++;
+	}
+}
+
+void mdParticleSystem::updateEmitters()
+{
+	list<ParticleEmitter*>::iterator it = particle_emitters.begin();
+	while (it != particle_emitters.end())
+	{
+		if (!(*it)->active)
+		{
+			particle_emitters.erase(it++);  // alternatively, i = items.erase(i);
+		}
+		else
+		{
+			(*it)->update(0);
+			++it;
+		}
+	}
+}
+
+```
