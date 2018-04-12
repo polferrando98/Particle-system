@@ -26,7 +26,7 @@ ParticleEmitter::ParticleEmitter(fPoint pos, string config_path)
 	type = (emmiterType)config.child("type").attribute("value").as_int(0);
 
 	if (type == EXPLOSION) {
-		//TODO 5.1 Create all the particles at once and make sure that they are not recreated later. You should use the active atribute
+		//TODO 5 Create all the particles at once and make sure that they are not recreated later. 
 		///When you finish you should be able to see an explosion pressing "e"
 	}
 }
@@ -85,7 +85,7 @@ bool ParticleEmitter::loadConfig(pugi::xml_document & config_file, pugi::xml_nod
 
 void ParticleEmitter::configureParticle(ParticleInfo & info)
 {
-	//TODO 3.2 Load the hardcoded atributes from the xml
+	//TODO 3.2 Load the hardcoded attributes from the xml
 	///When you finish emitter should behave more differently
 	info.angle = 270;
 
