@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+	<application>
+		<framerate_cap>60</framerate_cap>
+		<product name="Dungeon Brawler" />
+		<organization>Angry Frogs</organization>
+	</application>
+	<window>
+		<resolution width="1420" height="800"/>
+		<fullscreen value="false" />
+		<borderless value="false" />
+		<resizable value="false" />
+		<fullscreen_window value="false" />
+		<title>Dungeon Brawler</title>
+	</window>
+	<filesystem>
+	</filesystem>
+        <fonts>
+		<default path = "fonts/VCR_OSD_MONO_1.001.ttf"/>
+		<large_font size = "40"/>
+    		<medium_font size = "30"/>
+    		<small_font size = "15"/>
+	</fonts>
+	<gui>
+		<atlas file="gui/ui_placeholder.png"/>
+		<idle x="0" y="0" width="228" height="63"/>
+		<focused x="0" y="150" width="228" height="63"/>
+		<bar x="0" y="75" width="228" height="63"/>	
+		<gauge x="0" y="298" width="228" height="63"/>	
+	</gui>
+	<input>
+		<buffer window="2000"/>
+		<axis tolerance="0.2"/>
+	</input>
+	<entities>
+		<schemes>
+      <controller_schemes>
+			  <default_controller up="11" down="12" left="13"   right="14"  light_attack="2" heavy_attack="0"  special_1="10" special_2="9"  grab="1"  switch="3" />
+      </controller_schemes>
+      <keyboard_schemes>
+       <default_keyboard   up="82" down="81" left="80"   right="79"  light_attack="4" heavy_attack="22" special_1="29" special_2="27" grab="7"  switch="6"/>
+      </keyboard_schemes>
+		</schemes>
+	</entities>
+	<audio>
+		<flags flac="true" mod="false" mp3="true" ogg="true" />
+		<sfx chunksize="1024" channels="16" />
+	</audio>
+</config>
