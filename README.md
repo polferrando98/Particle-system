@@ -11,8 +11,11 @@ In a 2D videogame, a Particle system is a technique that uses a large number of 
 
 Even simple games benefit a lot from particle effects:
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_RqebZ5weG4?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/m_kPN9QeHXs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+But advanced particle systems can accomplish amazing things:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2gp7-ejkwBQ?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 ## How do they work?
@@ -59,15 +62,12 @@ We need a container to keep track and update every particle and emitter. This co
 
 # Code Implementation
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_RqebZ5weG4?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 Particles need to be created fast and in large cuantities, and dynamically allocating every particle not only is not very efficient but it could cause memory fragmentation. In order to avoid this, we need to create an **Object Pool.** An Object Pool is a class that will allocate and hold reusable particles at startup. It can be easily done with just two lines of code:
 
 ```c++
+static const int POOL_SIZE = 1000;
 
-	static const int POOL_SIZE = 1000;
-
-	Particle particles_[POOL_SIZE];
+Particle particles_[POOL_SIZE];
 ```
 
 Every particle will need to have a function to know if it is alive or not:
@@ -97,3 +97,33 @@ Particle* mdParticleSystem::create(ParticleInfo info)
 ```
 
 In this process, we need to pass as an argument the information that defines the atributes of the Particle, in this case, the information is grouped in a struct.
+
+The class in charge of loading and passing this information, as well as creating the paricle itlsef, is the emmiter:
+
+```c++
+Particle * ParticleEmitter::createParticle()
+{
+	ParticleInfo info;
+
+	configureParticle(info); //This loads the configuration from an XML
+
+	emission_timer.start();
+
+	return App->particle_system->create(info);
+}
+
+void ParticleEmitter::update(float dt)
+{
+
+	if (emission_timer.read() >= period) {
+		createParticle();
+		current_emissions++;
+	}
+
+	if (current_emissions >= max_emissions)
+		active = false;
+
+}
+```
+
+As we can see, the emitter creates particles based on a preiod that get out of the frequency that is loaded.
