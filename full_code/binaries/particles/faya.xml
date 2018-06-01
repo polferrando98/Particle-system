@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <config>
   <frequency value="500"></frequency>
-  <angle value="90" variation="10"></angle>
-  <vel_mag value="2.0f" variation="0"></vel_mag>
+  <angle value="70" variation="20"></angle>
+  <vel_mag value="2.5f" variation="0.3f"></vel_mag>
   <pos_var x="5" y="10"></pos_var>
   <lifetime value = "50" variation="30"></lifetime>
   <initial_scale value="1" variation="0.3f"></initial_scale>

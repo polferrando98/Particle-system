@@ -26,16 +26,21 @@ bool mdSceneManager::awake(const pugi::xml_node & md_config)
 bool mdSceneManager::start()
 {
 	bool ret = true;
-
-	App->particle_system->createEmitter({ 450,550 }, "particles/goku.xml");
-	App->particle_system->createEmitter({ 1060,550 }, "particles/goku-solution.xml");
-	goku = App->textures->load("particles/Goku_render.png");
+	int margin = 45;
+	for (int i = 0; i < wave_emitters; i++) {
+		wave[i] = App->particle_system->createEmitter({ (float)0,(float)i*margin }, "particles/faya.xml");
+	}
 
 	return true;
 }
 
 bool mdSceneManager::update(float dt)
 {
+	int speed = 3;
+	for (int i = 0; i < wave_emitters; i++) {
+		wave[i]->start_pos.x += speed;
+	}
+
 	if (App->input->getKey(SDL_SCANCODE_P) == KEY_DOWN) //"P" from Particle :-)
 	{
 		iPoint p;

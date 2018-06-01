@@ -8,13 +8,6 @@
 
 class ParticleEmitter;
 
-
-
-
-
-
-
-
 class mdSceneManager : public Module{
 public:
 	mdSceneManager();
@@ -24,6 +17,8 @@ public:
 	bool start() override;
 	bool update(float dt) override;
 
+	static const int wave_emitters = 20;
+	ParticleEmitter* wave[wave_emitters];
 
 private:
 	SDL_Texture * goku = nullptr;
