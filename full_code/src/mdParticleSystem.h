@@ -29,7 +29,7 @@ public:
 private:
 	Timer debug_particle_timer;
 
-	static const int POOL_SIZE = 1000;
+	static const int POOL_SIZE = 10000;
 
 	Particle particles_[POOL_SIZE];
 

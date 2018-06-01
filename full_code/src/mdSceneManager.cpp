@@ -36,9 +36,18 @@ bool mdSceneManager::start()
 
 bool mdSceneManager::update(float dt)
 {
-	int speed = 3;
-	for (int i = 0; i < wave_emitters; i++) {
-		wave[i]->start_pos.x += speed;
+	int speed = 6;
+	if (App->input->getKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) //"P" from Particle :-)
+	{
+		for (int i = 0; i < wave_emitters; i++) {
+			wave[i]->start_pos.x += speed;
+		}
+	}
+	if (App->input->getKey(SDL_SCANCODE_BACKSPACE) == KEY_REPEAT) //"P" from Particle :-)
+	{
+		for (int i = 0; i < wave_emitters; i++) {
+			wave[i]->start_pos.x -= speed;
+		}
 	}
 
 	if (App->input->getKey(SDL_SCANCODE_P) == KEY_DOWN) //"P" from Particle :-)
